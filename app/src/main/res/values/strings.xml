@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Wallpapers</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_to_wallpapers">Wallpapers</string>
+    <string name="by_bhoomit">by Bhoomit</string>
+    <string name="ok">OK</string>
+    <string name="click_on_image_to_set_wallpaper">Click on image to set wallpaper.</string>
+    <string name="set_wallpaper">Set Wallpaper</string>
+</resources>

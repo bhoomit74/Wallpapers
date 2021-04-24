@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.bhoomit.wallpapers.dashboard.viewmodel.DashboardViewModel" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".dashboard.view.DashboardFragment">
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:padding="@dimen/_10sdp"
+        android:text="@string/app_name"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/dashboardRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Title"
+        tools:listitem="@layout/item_image" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="@{viewModel.progressBarVisibility?View.VISIBLE:View.GONE}"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/notice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:fontFamily="@font/roboto_regular"
+        android:padding="@dimen/_15sdp"
+        android:elevation="@dimen/_100sdp"
+        android:text="@{viewModel.noticeText}"
+        android:textColor="@color/cardview_dark_background"
+        android:visibility="@{viewModel.noticeVisibility ? View.VISIBLE : View.GONE}"
+        app:layout_constraintBottom_toBottomOf="@+id/dashboardRecyclerView"
+        app:layout_constraintEnd_toStartOf="@+id/Ok"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/Ok"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:fontFamily="@font/roboto_bold"
+        android:onClick="@{()->viewModel.hideNotice()}"
+        android:text="@string/ok"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingEnd="@dimen/_15sdp"
+        android:paddingStart="@dimen/_15sdp"
+        android:background="@color/white"
+        android:visibility="@{viewModel.noticeVisibility?View.VISIBLE:View.GONE}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/notice" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

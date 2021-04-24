@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.bhoomit.wallpapers.full_screen_image.FullScreenImageViewModel" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".full_screen_image.FullScreenImageFragment">
+
+    <ImageView
+        android:id="@+id/wallpaper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        app:imageUrl="@{viewModel.image}"/>
+
+    <Button
+        android:id="@+id/setWallpaper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{()->viewModel.setWallpaper()}"
+        android:text="@string/set_wallpaper"
+        android:backgroundTint="@color/black"
+        android:background="@color/black"
+        android:padding="@dimen/_10sdp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

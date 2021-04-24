@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="onClickListener"
+            type="com.bhoomit.wallpapers.dashboard.view.OnClickListener" />
+        <variable
+            name="imageDetail"
+            type="com.bhoomit.wallpapers.dashboard.data.model.ImageDetail" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_150sdp"
+        android:padding="@dimen/_1ssp"
+        android:scaleType="fitXY"
+        android:onClick="@{()->onClickListener.onClick(imageDetail.download_url)}"
+        app:imageUrl="@{imageDetail.download_url}"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
