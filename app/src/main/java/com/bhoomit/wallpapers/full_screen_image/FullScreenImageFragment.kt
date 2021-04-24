@@ -15,11 +15,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.bhoomit.wallpapers.R
 import com.bhoomit.wallpapers.databinding.FragmentFullScreenImageBinding
 import com.bhoomit.wallpapers.util.Extensions.setImage
+import com.bhoomit.wallpapers.util.Extensions.showErrorToast
 
 class FullScreenImageFragment : Fragment() {
 
     private lateinit var mBinding : FragmentFullScreenImageBinding
-    private lateinit var mViewModel : FullScreenImageViewModel
+    private lateinit var mFullScreenImageViewModel : FullScreenImageViewModel
 
 
     override fun onCreateView(
@@ -33,34 +34,31 @@ class FullScreenImageFragment : Fragment() {
     }
 
     private fun initData(){
-        val url = arguments?.getString("URL")
-        mViewModel = ViewModelProvider(this).get(FullScreenImageViewModel::class.java)
-        if (url!=null){
-            mViewModel.setImage(url)
-        }
-        else{
-            Toast.makeText(requireContext(),"URL not found",Toast.LENGTH_SHORT).show()
-        }
-        mBinding.viewModel = mViewModel
+        mFullScreenImageViewModel = ViewModelProvider(this).get(FullScreenImageViewModel::class.java)
+        mFullScreenImageViewModel.setImage(arguments?.getString("URL"))
+        mBinding.viewModel = mFullScreenImageViewModel
         mBinding.lifecycleOwner = viewLifecycleOwner
         mBinding.executePendingBindings()
     }
 
     private fun initObserver(){
-        mViewModel.setWallpaper.observe(viewLifecycleOwner, Observer {
+        mFullScreenImageViewModel.setWallpaper.observe(viewLifecycleOwner, Observer {
             if (it!=null){
                val bitmap = mBinding.wallpaper.drawable.toBitmap()
-                WallpaperManager.getInstance(requireContext())
-                    .setBitmap(bitmap)
+                WallpaperManager.getInstance(requireContext()).setBitmap(bitmap)
+                requireContext().showErrorToast(resources.getString(R.string.wallpaper_set_successfully_message))
             }
         })
+
+        mFullScreenImageViewModel.error.observe(viewLifecycleOwner, Observer {
+            requireContext().showErrorToast(it)
+        })
     }
-
-
-
 }
 
 @BindingAdapter("imageUrl")
-fun load(imageView: ImageView, imageUrl: String) {
-    imageView.context.setImage(imageView, imageUrl)
+fun load(imageView: ImageView, imageUrl: String?) {
+    if (imageUrl!=null) {
+        imageView.context.setImage(imageView, imageUrl)
+    }
 }

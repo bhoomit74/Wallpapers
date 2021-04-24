@@ -21,13 +21,19 @@ class MainActivity : AppCompatActivity() {
 
 
         Handler(Looper.getMainLooper()).postDelayed({
-            CheckConnection(applicationContext).observe(this, Observer {
-                if (it && mNavController.currentDestination?.id == R.id.noInternetFragment){
-                    mNavController.navigate(R.id.action_noInternetFragment_to_dashboardFragment)
-                }else if (!it){
-                    mNavController.navigate(R.id.action_dashboardFragment_to_noInternetFragment)
-                }
-            })
+            initObserver()
         },2100)
+    }
+
+    private fun initObserver(){
+        CheckConnection(applicationContext).observe(this, Observer {
+            if (it && mNavController.currentDestination?.id == R.id.noInternetFragment){
+                mNavController.navigate(R.id.action_noInternetFragment_to_dashboardFragment)
+            }
+            else if (!it && mNavController.currentDestination?.id == R.id.dashboardFragment){
+                mNavController.navigate(R.id.action_dashboardFragment_to_noInternetFragment)
+            }
+
+        })
     }
 }

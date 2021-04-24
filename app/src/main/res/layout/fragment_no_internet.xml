@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="No Internet Connection"
+        android:text="@string/no_internet_connection"
         android:fontFamily="@font/roboto_bold"
         android:textSize="@dimen/_16sdp"
         android:gravity="center"/>

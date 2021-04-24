@@ -6,4 +6,6 @@
     <string name="ok">OK</string>
     <string name="click_on_image_to_set_wallpaper">Click on image to set wallpaper.</string>
     <string name="set_wallpaper">Set Wallpaper</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="wallpaper_set_successfully_message">Done!</string>
 </resources>

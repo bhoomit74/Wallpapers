@@ -1,6 +1,5 @@
 package com.bhoomit.wallpapers.dashboard.view
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +25,6 @@ class DashboardAdapter(private val imageList : ArrayList<ImageDetail>,
     fun updateList(newMyImageList : ArrayList<ImageDetail>){
         val start = imageList.size
         imageList.addAll(newMyImageList)
-        Log.d("RECYCLERVIEW","updateList : "+imageList.size.toString())
         notifyItemRangeInserted(start,30)
     }
 

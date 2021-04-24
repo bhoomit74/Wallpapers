@@ -12,16 +12,20 @@ class FullScreenImageViewModel : ViewModel() {
     private var _setWallpaper : MutableLiveData<Boolean> = MutableLiveData()
     var setWallpaper : LiveData<Boolean> = _setWallpaper
 
-    fun setImage(url : String){
-        _image.value = url
+    private var _error : MutableLiveData<String> = MutableLiveData()
+    var error : LiveData<String> = _error
+
+    fun setImage(url : String?){
+        if (url.isNullOrEmpty()){
+            _error.value = "Image not found"
+        }
+        else {
+            _image.value = url
+        }
     }
 
     fun setWallpaper(){
         _setWallpaper.value = true
-    }
-
-    fun removeSetWallpaper(){
-        _setWallpaper.value = false
     }
 
 }
