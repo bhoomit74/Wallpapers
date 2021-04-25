@@ -5,9 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Toast
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -18,7 +15,7 @@ import com.bhoomit.wallpapers.R
 import com.bhoomit.wallpapers.dashboard.data.model.ImageDetail
 import com.bhoomit.wallpapers.dashboard.viewmodel.DashboardViewModel
 import com.bhoomit.wallpapers.databinding.FragmentDashboardBinding
-import com.bhoomit.wallpapers.util.Extensions.setImage
+import com.bhoomit.wallpapers.util.Extensions.showErrorToast
 
 class DashboardFragment : Fragment() {
 
@@ -43,6 +40,7 @@ class DashboardFragment : Fragment() {
         mBinding.viewModel = mDashboardViewModel
         mBinding.lifecycleOwner = viewLifecycleOwner
 
+        temp.clear()
         mDashboardViewModel.allImages.value?.forEach {
             temp.add(it)
         }  // remove this temp variable
@@ -76,7 +74,7 @@ class DashboardFragment : Fragment() {
         })
 
         mDashboardViewModel.error.observe(viewLifecycleOwner, Observer {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+            requireContext().showErrorToast(it)
         })
 
     }
@@ -93,9 +91,4 @@ class DashboardFragment : Fragment() {
 
         }
     }
-}
-
-@BindingAdapter("imageUrl")
-fun load(imageView: ImageView, imageUrl: String) {
-    imageView.context.setImage(imageView, imageUrl)
 }

@@ -6,15 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bhoomit.wallpapers.R
 import com.bhoomit.wallpapers.databinding.FragmentFullScreenImageBinding
-import com.bhoomit.wallpapers.util.Extensions.setImage
 import com.bhoomit.wallpapers.util.Extensions.showErrorToast
 
 class FullScreenImageFragment : Fragment() {
@@ -53,12 +49,5 @@ class FullScreenImageFragment : Fragment() {
         mFullScreenImageViewModel.error.observe(viewLifecycleOwner, Observer {
             requireContext().showErrorToast(it)
         })
-    }
-}
-
-@BindingAdapter("imageUrl")
-fun load(imageView: ImageView, imageUrl: String?) {
-    if (imageUrl!=null) {
-        imageView.context.setImage(imageView, imageUrl)
     }
 }
