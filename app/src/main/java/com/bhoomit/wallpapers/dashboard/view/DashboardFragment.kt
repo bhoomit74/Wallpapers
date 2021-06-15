@@ -27,7 +27,7 @@ class DashboardFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         mBinding = FragmentDashboardBinding.inflate(inflater, container, false)
         initData()
         initObserver()
